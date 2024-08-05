@@ -1,6 +1,4 @@
 import React = require("react");
-import QuantityElement from "../src/component/Quantity";
-import SelectorElement from "../src/component/Selector";
 
 import {
   reactExtension,
@@ -10,7 +8,9 @@ import {
   useCartLineTarget,
   useApplyCartLinesChange,
 } from "@shopify/ui-extensions-react/checkout";
+
 import { queryProduct } from "./queries/queries";
+import { ModalElement, QuantityElement, SelectorElement } from "./component";
 
 export default reactExtension(
   "purchase.checkout.cart-line-item.render-after",
@@ -20,9 +20,12 @@ export default reactExtension(
 function Extension() {
   const { query } = useApi();
   const cartLine = useCartLineTarget();
+
   const applyCartLinesChange = useApplyCartLinesChange();
 
   const [linePlans, setLinePlans] = React.useState<LinePlan[] | null>(null);
+  const [values, setValues] = React.useState<OptionValues[] | null>(null);
+  const [variants, setVariants] = React.useState<VariantType[] | null>(null);
 
   const handleCartChange = (config: ConfigCartChange) => {
     applyCartLinesChange(config);
@@ -33,8 +36,31 @@ function Extension() {
     const getVarintData = async () => {
       try {
         const productId = cartLine.merchandise.product.id;
-        const response = await query<SellingsPlan>(queryProduct(productId));
+        const response = await query<ProductType>(queryProduct(productId));
+        if (response.data.node.variants) {
+          const allVariant = response.data.node.variants.edges.map(variant => {
+            return {
+              id: variant.node.id,
+              title: (variant.node.title).trim(),
+              available: variant.node.availableForSale
+            }
+          });
+          if (allVariant) {
+            setVariants(allVariant)
+          }
 
+        }
+        if (response.data.node.options) {
+          const options = response.data.node.options.map((option, index) => {
+            return {
+              ...option,
+              position: index + 1
+            }
+          });
+          if (options) {
+            setValues(options)
+          }
+        }
         if (response.data.node.sellingPlanGroups.edges[0]) {
           const nodePlans =
             response.data.node.sellingPlanGroups.edges[0].node.sellingPlans
@@ -80,6 +106,17 @@ function Extension() {
           />
         </GridItem>
       )}
+      {values && variants && variants.length > 1 && (
+        <GridItem>
+          <ModalElement
+            variants={variants}
+            cartLine={cartLine}
+            values={values}
+            handleCartChange={handleCartChange}
+          />
+        </GridItem>
+      )}
+
     </Grid>
   );
 }

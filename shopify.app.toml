@@ -1,7 +1,7 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
 client_id = "db105bac55c1cec86da2e89f9e5e8132"
-name = "quantity"
+name = "Cart line actions"
 handle = "quantity-5"
 application_url = "https://shopify.dev/apps/default-app-home"
 embedded = true
@@ -12,7 +12,7 @@ include_config_on_deploy = true
 
 [access_scopes]
 # Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
-scopes = "read_products,unauthenticated_read_product_inventory"
+scopes = "read_inventory,read_products,unauthenticated_read_product_inventory"
 
 [auth]
 redirect_urls = [ "https://shopify.dev/apps/default-app-home/api/auth" ]
