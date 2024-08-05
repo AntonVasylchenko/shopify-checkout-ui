@@ -45,3 +45,6 @@ Key Functionalities:
 2. Allows variant changes: Users can select different options to find a new variant of the product.
 3. Finds and updates variants: Searches for the new variant based on user selection and updates the cart accordingly.
 4. Handles user interactions: Includes buttons and modal windows for seamless user experience.
+
+#### Test Product
+[The Videographer Snowboard.](https://learn123456.myshopify.com/products/the-videographer-snowboard?_ab=0&_bt=eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaEpJaDVzWldGeWJqRXlNelExTmk1dGVYTm9iM0JwWm5rdVkyOXRCam9HUlZRPSIsImV4cCI6IjIwMjQtMDgtMDVUMDQ6NDM6MDkuNjAwWiIsInB1ciI6InBlcm1hbmVudF9wYXNzd29yZF9ieXBhc3MifX0%3D--85c08e30c3efd1038c304035065f0b08cd964a4d&_fd=0&_sc=1&key=dc2dbe1ed2b1f8a3a142d2bc519b52e6feff012b724873439fe953a9a350bec1&preview_theme_id=144000844029 "The Videographer Snowboard.")
